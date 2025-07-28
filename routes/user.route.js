@@ -33,17 +33,17 @@ userRouter.post('/login', async (req, res) => {
                         if (token) {
                             res.send({ 'message': `Logged in successfully. Let's get started!`, 'email': email, 'name': name, 'token': token })
                         } else {
-                            res.send({ 'message': 'Login failed. Please try again.', 'error1': err })
+                            res.send({ 'message': 'Login failed. Please try again.', 'error': err })
                         }
                     })
                 } else {
-                    res.send({ 'message': 'Login failed. Please try again.', 'error2': err })
+                    res.send({ 'message': 'Login failed. Please try again.', 'error': err })
                 }
             })
         }
 
     } catch (error) {
-        res.send({ 'message': 'Login failed! please signup first', 'error3': error })
+        res.send({ 'message': 'Login failed! please signup first', 'error': error })
     }
 
 })

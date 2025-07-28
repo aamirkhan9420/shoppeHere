@@ -5,6 +5,7 @@ require('dotenv').config()
 app.use(express.json())
 let cors = require('cors')
 const { userRouter } = require('./routes/user.route')
+const {ProductListRouter} = require('./routes/productList.route')
 app.use(cors({
     origin: "*"
 }))
@@ -15,6 +16,7 @@ app.get("/", (req, res) => {
     res.send("welcome to home")
 })
 app.use('/user', userRouter)
+app.use('/product', ProductListRouter)
 app.listen(PORT, async (req, res) => {
     try {
         await connection
