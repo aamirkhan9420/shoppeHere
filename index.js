@@ -6,6 +6,7 @@ app.use(express.json())
 let cors = require('cors')
 const { userRouter } = require('./routes/user.route')
 const {ProductListRouter} = require('./routes/productList.route')
+const { bannerListRouter } = require('./routes/banner.route')
 app.use(cors({
     origin: "*"
 }))
@@ -17,6 +18,8 @@ app.get("/", (req, res) => {
 })
 app.use('/user', userRouter)
 app.use('/product', ProductListRouter)
+app.use('/banner', bannerListRouter)
+
 app.listen(PORT, async (req, res) => {
     try {
         await connection
