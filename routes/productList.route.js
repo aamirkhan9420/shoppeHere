@@ -25,7 +25,6 @@ ProductListRouter.post('/productAdd',async(req,res)=>{
  }
 })
 ProductListRouter.patch('/update-images', async (req, res) => {
-//   const updates = req.body; // Expecting array of { id, img }
    const updates = [
   { id: 250, img: "https://i.ibb.co/Kp76WFQ2/dress1.jpg" },
   { id: 260, img: "https://i.ibb.co/gFVcWqDR/dress2.jpg" },
@@ -87,27 +86,6 @@ ProductListRouter.patch('/update-images', async (req, res) => {
     res.status(500).json({ error: 'Update failed', details: err });
   }
 });
-ProductListRouter.post('/productBanner',async(req,res)=>{
-   let body = req.body
- try {
-  let data=  new ProductListModel(body)
-   await data.save()
-    res.send({ 'message': 'data added.' })
- } catch (error) {
-    res.send({'message':'Product list failed to fetch!','error':error})
- }
-})
-ProductListRouter.get('/bannerdata',async(req,res)=>{
-    let productList =  await ProductListModel.find()
- try {
-    if(productList.length>0){
-        res.send({'message':'Banner list successfully fetched',data:productList})
-    }else{
-        res.send({'message':'No product found!',data:[]})
-    }
-    
- } catch (error) {
-    res.send({'message':'Product list failed to fetch!','error':error})
- }
-})
+
+
 module.exports={ProductListRouter}
