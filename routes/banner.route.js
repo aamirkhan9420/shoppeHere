@@ -25,4 +25,15 @@ bannerListRouter.get('/bannerdata',async(req,res)=>{
     res.send({'message':'Product list failed to fetch!','error':error})
  }
 })
+bannerListRouter.delete('/deleteall', async (req, res) => {
+  try {
+    await bannerListModel.deleteMany({});
+    res.send({ message: 'All banner data deleted successfully.' });
+  } catch (error) {
+    res.status(500).send({
+      message: 'Failed to delete banner data.',
+      error: error.message
+    });
+  }
+});
 module.exports={bannerListRouter}
