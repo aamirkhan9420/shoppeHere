@@ -10,7 +10,8 @@ const bannerListSchema = mongoose.Schema({
     gender: String,
     price: Number,
     inCart:Boolean,
-    quantity:Number
+    quantity:Number,
+    offerText:String
 })
 const bannerListModel = mongoose.model('bannerList', bannerListSchema)
 module.exports = { bannerListModel }
