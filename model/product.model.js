@@ -10,7 +10,8 @@ const productListSchema = mongoose.Schema({
     gender: String,
     price: Number,
     inCart:Boolean,
-    quantity:Number
+    quantity:Number,
+    isFavourite:Boolean
 })
 const ProductListModel = mongoose.model('productList', productListSchema)
 module.exports = { ProductListModel }
