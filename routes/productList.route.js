@@ -144,4 +144,50 @@ ProductListRouter.put('/update-favourite', async (req, res) => {
 
 
 
+ProductListRouter.get('/', async (req, res) => {
+  try {
+    const { gender, sort, color, size, type } = req.query;
+
+    let filter = {};
+
+    if (gender) filter.gender = gender.toLowerCase(); // male/female
+    if (type) filter.type = type; // Suits, Shirts, etc.
+    if (color) filter.color = { $in: [color.toLowerCase()] }; // matches if color is in array
+    if (size) filter.size = { $in: [size.toUpperCase()] };   // matches if size is in array
+
+    let query = ProductListModel.find(filter);
+
+    // Sorting
+    if (sort === 'highPrice') {
+      query = query.sort({ price: -1 }); // highest first
+    } else if (sort === 'lowPrice') {
+      query = query.sort({ price: 1 });  // lowest first
+    }
+
+    const products = await query.exec();
+    if(products.length==0){
+       return res.json({
+        success: false,
+        message: "No products found matching your filters."
+      });
+    }else{
+       res.json({
+      success: true,
+      count: products.length,
+      data: products
+    });
+    }
+   
+  } catch (err) {
+    console.error("Filter Error:", err);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch products',
+      details: err.message
+    });
+  }
+});
+
+
+
 module.exports = { ProductListRouter }
