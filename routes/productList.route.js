@@ -146,8 +146,8 @@ ProductListRouter.get('/', async (req, res) => {
     let filter = {};
     if (gender) filter.gender = gender.toLowerCase(); // male/female
     if (type) filter.type = type; // Suits, Shirts, etc.
-    if (color) filter.color = { $in: [color.toLowerCase()] }; // matches if color is in array
-    if (size) filter.size = { $in: [size.toUpperCase()] };   // matches if size is in array
+    if (color) filter.color = { $in: [color.toLowerCase()] }; 
+    if (size) filter.size = { $in: [size.toUpperCase()] };   
 
     let query = ProductListModel.find(filter);
     // Sorting
